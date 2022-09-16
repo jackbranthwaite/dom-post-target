@@ -1,0 +1,41 @@
+// 01. Media Query Breakpoints
+$mobile-portrait-max: 478px;
+$mobile-landscape-max: 767px;
+$tablet-max: 991px;
+$large-min: 1280px;
+$xlarge-min: 1440px;
+$xxlarge-min: 1920px;
+
+// 02. Colours
+$yellow: #ffd068;
+$red: #f56d4c;
+$error-orange: #ff9525;
+$blue: #8bd1d0;
+$grey--dark: #2e3649;
+$grey: #485570;
+$grey--light: #9599a2;
+$grey--transparent: rgba(0, 7, 18, 0.6);
+$white: #dfe4e6;
+$bright-white: #f6f7f9;
+$black: #0a0a0a;
+$white: #fff;
+$purple: #4b3086;
+
+$body-background-color: $bright-white;
+$default-font-color: $grey;
+$default-hover-color: $grey--dark;
+
+// 03. Type
+$exo: 'Exo', Helvetica, Arial, sans-serif;
+$body-font-family: $exo;
+$default-font-family: $body-font-family;
+$font-family: $body-font-family;
+$heading-font-family: $exo;
+
+// 04. Grid
+$grid-columns: 12;
+$grid-gutter: 12px;
+$container-width: 1440px;
+$container-gutter-mobile: 25px;
+$container-gutter-tablet: 50px;
+$container-gutter-desktop: 70px;

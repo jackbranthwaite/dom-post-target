@@ -1,0 +1,43 @@
+// 01. Settings
+@import "config";
+
+// 03. Core
+@import "core/reset";
+@import "core/base";
+@import "core/grid";
+@import "core/type";
+
+.DateInput {
+  text-align: center;
+  width: 100%;
+
+  .DateInput_input {
+    text-align: center;
+  }
+}
+// Will edit selected date or the endpoints of a range of dates
+.CalendarDay__selected {
+  background: $purple;
+  border: 0;
+  color: #fff;
+}
+
+// Will edit when hovered over. _span style also has this property
+.CalendarDay__selected:hover {
+  background: lighten($purple, 10%);
+  border: 0;
+  color: #fff;
+}
+
+.DayPickerKeyboardShortcuts_buttonReset {
+  display: none;
+}
+
+.SingleDatePicker_picker {
+  z-index: 1000 !important;
+}
+
+.SingleDatePicker,
+.SingleDatePickerInput {
+  width: 100%;
+}

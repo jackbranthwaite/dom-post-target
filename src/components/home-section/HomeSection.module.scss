@@ -1,0 +1,40 @@
+@import "../../styles/config.scss";
+
+.HomeSectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Title {
+  font-size: 50px;
+}
+
+.Statement {
+  font-size: 20px;
+  max-width: 500px;
+  min-width: 300px;
+  width: 30vw;
+  margin-top: 2rem;
+}
+
+.Button {
+  height: 50px;
+  background-color: #485570;
+  border-radius: 50px;
+  width: 20vw;
+  height: 4vw;
+  align-self: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.HomeSectionWrapper {
+  display: flex;
+  flex-direction: column;
+}

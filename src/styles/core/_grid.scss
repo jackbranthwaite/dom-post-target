@@ -1,0 +1,88 @@
+// ===================================================================
+// Flexbox Grid Mixins (Simplified)
+// Version 0.2.1
+// Description: Sass Mixins to generate Flexbox grid
+// Author: thingsym
+// GitHub: https://github.com/thingsym/flexbox-grid-mixins
+// MIT License
+// ===================================================================
+
+@charset 'utf-8';
+
+@function convert-grid-unit($number) {
+  @if type-of($number) == 'number' and unitless($number) {
+    @return percentage($number / $grid-columns);
+  }
+
+  @return $number;
+}
+
+@mixin container($width: $container-width) {
+  margin: 0 auto;
+
+  padding-left: $container-gutter-desktop;
+  padding-right: $container-gutter-desktop;
+
+  width: 100%;
+
+  @if unitless($width) == true or unit($width) == 'px' {
+    max-width: $width + $container-gutter-desktop * 2;
+  } @else {
+    max-width: calc(#{$width} + #{$container-gutter-desktop * 2});
+  }
+
+  @include tablet {
+    @if unitless($width) == true or unit($width) == 'px' {
+      max-width: $width + $container-gutter-tablet * 2;
+    } @else {
+      max-width: calc(#{$width} + #{$container-gutter-tablet * 2});
+    }
+    padding-left: $container-gutter-tablet;
+    padding-right: $container-gutter-tablet;
+  }
+
+  @include mobile-l {
+    @if unitless($width) == true or unit($width) == 'px' {
+      max-width: $width + $container-gutter-mobile * 2;
+    } @else {
+      max-width: calc(#{$width} + #{$container-gutter-mobile * 2});
+    }
+    padding-left: $container-gutter-mobile;
+    padding-right: $container-gutter-mobile;
+  }
+}
+
+@mixin grid($flex-direction: null, $flex-wrap: wrap) {
+  display: flex;
+
+  @if $flex-direction {
+    flex-direction: $flex-direction;
+  }
+
+  @if $flex-wrap {
+    flex-wrap: $flex-wrap;
+  }
+
+  @content;
+}
+
+@mixin grid-col($width: 100%, $align: stretch, $grid-gutter: $grid-gutter) {
+  align-self: $align;
+
+  flex-basis: convert-grid-unit($width);
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  padding-left: $grid-gutter / 2;
+  padding-right: $grid-gutter / 2;
+
+  width: convert-grid-unit($width);
+}
+
+@mixin grid-offset-left($offset: 1) {
+  margin-left: convert-grid-unit($offset);
+}
+
+@mixin grid-offset-right($offset: 1) {
+  margin-right: convert-grid-unit($offset);
+}

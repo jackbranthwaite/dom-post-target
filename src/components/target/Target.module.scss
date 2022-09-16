@@ -1,0 +1,30 @@
+@import "../../styles/config";
+
+.TargetContainer {
+  height: 30vw;
+  width: 30vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border-top: 3px solid #485570;
+  border-left: 3px solid #485570;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.LetterBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid #485570;
+  border-right: 3px solid #485570;
+}
+
+.Letter {
+  text-transform: capitalize;
+  font-size: clamp(3rem, 4vw, 6rem);
+}

@@ -1,0 +1,35 @@
+@mixin mobile-p {
+  @media screen and (max-width: #{$mobile-portrait-max}) {
+    @content;
+  }
+}
+
+@mixin mobile-l {
+  @media screen and (max-width: #{$mobile-landscape-max}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: #{$tablet-max}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media screen and (min-width: #{$large-min}) {
+    @content;
+  }
+}
+
+@mixin xlarge {
+  @media screen and (min-width: #{$xlarge-min}) {
+    @content;
+  }
+}
+
+@mixin xxlarge {
+  @media screen and (min-width: #{$xxlarge-min}) {
+    @content;
+  }
+}

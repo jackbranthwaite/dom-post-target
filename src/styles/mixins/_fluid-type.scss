@@ -1,0 +1,49 @@
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $unit-1: unit($min-vw);
+  $unit-2: unit($max-vw);
+  $unit-3: unit($min-font-size);
+  $unit-4: unit($max-font-size);
+
+  @if $unit-1 == $unit-2 and $unit-1 == $unit-3 and $unit-1 == $unit-4 {
+    font-size: $min-font-size;
+    @media screen and (min-width: $min-vw) {
+      font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+    }
+    @media screen and (min-width: $max-vw) {
+      font-size: $max-font-size;
+    }
+  }
+}
+
+@mixin body-fluid-type() {
+  $min-font: 14px;
+  $max-font: 16px;
+
+  @include fluid-type($mobile-landscape-max, $tablet-max, $min-font, $max-font);
+}
+
+@mixin type($min, $max) {
+  @include fluid-type($mobile-landscape-max, $tablet-max, $min, $max);
+}
+
+@mixin vw-clamped-size($param, $min, $max) {
+  $unit-1: unit($mobile-landscape-max);
+  $unit-2: unit($tablet-max);
+  $unit-3: unit($min);
+  $unit-4: unit($max);
+
+  @if $unit-1 == $unit-2 and $unit-1 == $unit-3 and $unit-1 == $unit-4 {
+    #{$param}: $min;
+    @media screen and (min-width: $mobile-landscape-max) {
+      #{$param}: calc(#{$min} + #{strip-unit($max - $min)} * ((100vw - #{$mobile-landscape-max}) / #{strip-unit($tablet-max - $mobile-landscape-max)}));
+    }
+    @media screen and (min-width: $tablet-max) {
+      #{$param}: $max;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@mixin medium-text() {
+  @include fluid-type(280px, 375px, 18px, 22.4px);
+  // font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+@mixin large-text() {
+  @include fluid-type(280px, 375px, 30px, 38px);
+  // font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
