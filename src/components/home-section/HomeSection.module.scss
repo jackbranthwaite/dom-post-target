@@ -8,8 +8,16 @@
   width: 100vw;
 }
 
+.TitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .Title {
   font-size: 50px;
+  margin: 0;
 }
 
 .Statement {

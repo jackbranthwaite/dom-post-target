@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Target } from "../target/Target";
 import { TextInput } from "../text-input/TextInput";
+import { Timer } from "../timer/Timer";
 import s from "./HomeSection.module.scss";
 
 export const HomeSection = () => {
@@ -20,7 +21,10 @@ export const HomeSection = () => {
   return (
     <div className={s.HomeSectionContainer}>
       <div className={s.HomeSectionWrapper}>
-        <h1 className={s.Title}>tordle</h1>
+        <div className={s.TitleWrapper}>
+          <h1 className={s.Title}>tordle</h1>
+          <Timer />
+        </div>
 
         <Target word={"arcebatfi"} answer={answer} correct={correct} />
         <p className={s.Statement}>
