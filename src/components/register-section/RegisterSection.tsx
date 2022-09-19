@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { register } from "../../services/api/register";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./RegisterSection.module.scss";
@@ -17,7 +18,7 @@ export const RegisterSection = () => {
   };
 
   const submitUser = () => {
-    console.log(user);
+    register(user);
   };
 
   return (
@@ -58,7 +59,9 @@ export const RegisterSection = () => {
             setPasswordConfirmation(e.target?.value)
           }
         />
-        <Button onClick={() => console.log("Fuck")}>register</Button>
+        <Button secondary={false} onClick={submitUser}>
+          register
+        </Button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { login } from "../../services/api/login";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./LoginSection.module.scss";
@@ -13,7 +14,7 @@ export const LoginSection = () => {
   };
 
   const loginUser = () => {
-    console.log(user);
+    login(user);
   };
 
   return (
@@ -36,7 +37,9 @@ export const LoginSection = () => {
           type={"password"}
           title={"password"}
         />
-        <Button onClick={loginUser}>login</Button>
+        <Button secondary={false} onClick={loginUser}>
+          login
+        </Button>
       </div>
     </div>
   );
