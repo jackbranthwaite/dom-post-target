@@ -22,4 +22,22 @@
   font-size: 20px;
   max-height: 80px;
   max-width: 400px;
+  cursor: pointer;
+}
+
+.SecondaryButton {
+  height: 50px;
+  background-color: #f6f7f9;
+  border-radius: 50px;
+  border: 2px solid #485570;
+  width: 120px;
+  height: 35px;
+  align-self: center;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #485570;
+  font-size: 20px;
+  cursor: pointer;
 }

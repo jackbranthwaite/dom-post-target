@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "../button/Button";
 import { Target } from "../target/Target";
 import { TextInput } from "../text-input/TextInput";
 import { Timer } from "../timer/Timer";
@@ -18,8 +19,17 @@ export const HomeSection = () => {
     }
   };
 
+  const signOut = () => {
+    console.log("Sign me out");
+  };
+
   return (
     <div className={s.HomeSectionContainer}>
+      <div className={s.ButtonWrapper}>
+        <Button secondary={true} onClick={signOut}>
+          sign out
+        </Button>
+      </div>
       <div className={s.HomeSectionWrapper}>
         <div className={s.TitleWrapper}>
           <h1 className={s.Title}>tordle</h1>
@@ -31,14 +41,16 @@ export const HomeSection = () => {
           there is at least one nine letter word - find one and stop your time
         </p>
         <TextInput
+          title=""
+          type="text"
           value={guess}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setGuess(e.target?.value)
           }
         />
-        <button onClick={checkGuess} className={s.Button}>
+        <Button secondary={false} onClick={checkGuess}>
           Check
-        </button>
+        </Button>
       </div>
     </div>
   );

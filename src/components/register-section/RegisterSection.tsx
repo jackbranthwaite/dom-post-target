@@ -16,6 +16,10 @@ export const RegisterSection = () => {
     password_confirmation: passwordConfirmation,
   };
 
+  const submitUser = () => {
+    console.log(user);
+  };
+
   return (
     <div className={s.RegisterSectionContainer}>
       <div className={s.RegisterContainer}>
