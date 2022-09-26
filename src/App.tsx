@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes } from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <Routes />
-    </div>
+    <AuthContextProvider>
+      <div className="App">
+        <Routes />
+      </div>
+    </AuthContextProvider>
   );
 }
 

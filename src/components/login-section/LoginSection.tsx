@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
 import { login } from "../../services/api/login";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
@@ -7,6 +8,7 @@ import s from "./LoginSection.module.scss";
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const auth = useProvideAuth();
 
   const user = {
     email: email,
@@ -14,7 +16,7 @@ export const LoginSection = () => {
   };
 
   const loginUser = () => {
-    login(user);
+    auth.login(user);
   };
 
   return (

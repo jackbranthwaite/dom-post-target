@@ -8,7 +8,7 @@ import { csrf } from "./csrf";
 export const logout = async () => {
   try {
     await csrf();
-    return await API.post("/api/logout");
+    return await API.post("/logout");
   } catch (error: any) {
     if (error.response) {
       return error.response.data;

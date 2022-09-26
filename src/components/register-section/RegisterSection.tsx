@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
 import { register } from "../../services/api/register";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./RegisterSection.module.scss";
 
 export const RegisterSection = () => {
+  const auth = useProvideAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +20,7 @@ export const RegisterSection = () => {
   };
 
   const submitUser = () => {
-    register(user);
+    auth.register(user);
   };
 
   return (

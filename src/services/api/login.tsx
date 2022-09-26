@@ -10,7 +10,7 @@ export const login = async (inputs: any) => {
 
   try {
     await csrf();
-    return await API.post("/api/login", data);
+    return await API.post("/login", data);
   } catch (error: any) {
     if (error.response) {
       return error.response.data;

@@ -15,7 +15,7 @@ interface IInputs {
 export const register = async (inputs: IInputs) => {
   try {
     await csrf();
-    const result = await API.post("/api/register", inputs);
+    const result = await API.post("/register", inputs);
     return result;
   } catch (error: any) {
     return error.response;

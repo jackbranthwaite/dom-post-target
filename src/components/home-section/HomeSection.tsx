@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
 import { logout } from "../../services/api/logout";
 import { Button } from "../button/Button";
 import { Target } from "../target/Target";
@@ -8,6 +9,7 @@ import s from "./HomeSection.module.scss";
 
 export const HomeSection = () => {
   const answer = "fabricate";
+  const auth = useProvideAuth();
   const [guess, setGuess] = useState("");
   const [correct, setCorrect] = useState(false);
 
@@ -23,7 +25,7 @@ export const HomeSection = () => {
   return (
     <div className={s.HomeSectionContainer}>
       <div className={s.ButtonWrapper}>
-        <Button secondary={true} onClick={logout}>
+        <Button secondary={true} onClick={auth.logout}>
           sign out
         </Button>
       </div>
