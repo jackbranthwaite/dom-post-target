@@ -22,7 +22,7 @@ export const LoginSection = () => {
   return (
     <div className={s.LoginSectionContainer}>
       <div className={s.LoginSectionWrapper}>
-        <h1 className={s.Title}>tordle</h1>
+        <h1 className={s.Title}>targle</h1>
         <TextInput
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

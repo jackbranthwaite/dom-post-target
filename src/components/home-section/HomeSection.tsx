@@ -31,7 +31,7 @@ export const HomeSection = () => {
       </div>
       <div className={s.HomeSectionWrapper}>
         <div className={s.TitleWrapper}>
-          <h1 className={s.Title}>tordle</h1>
+          <h1 className={s.Title}>targle</h1>
           <Timer />
         </div>
 

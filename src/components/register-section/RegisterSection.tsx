@@ -27,7 +27,7 @@ export const RegisterSection = () => {
     <div className={s.RegisterSectionContainer}>
       <div className={s.RegisterContainer}>
         <div className={s.TitleWrapper}>
-          <h1 className={s.Title}>tordle</h1>
+          <h1 className={s.Title}>targle</h1>
         </div>
         <TextInput
           type={"text"}

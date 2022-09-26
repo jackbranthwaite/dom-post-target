@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
 
-function useRequireAuth(redirectUrl = "/sign-in") {
+function useRequireAuth(redirectUrl = "/login") {
   const auth = React.useContext(AuthContext);
   const location = useLocation();
   const router = useNavigate();

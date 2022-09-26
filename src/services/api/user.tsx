@@ -7,6 +7,7 @@ export const getUser = async (id = false) => {
   try {
     return await API.get("/api/user" + (id ? `/${id}` : ""));
   } catch (error: any) {
+    console.log(error);
     if (error.response) {
       return error.response.data;
     } else {
