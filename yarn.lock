@@ -522,6 +522,11 @@ chalk@^2.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+classnames@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -787,6 +792,11 @@ globals@^11.1.0:
   version "11.12.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
+
+gsap@^3.11.2:
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.11.2.tgz#e2d6e7b0f2bcdf16a0690ad1ca44d764775b4bec"
+  integrity sha512-y1NSjM2i2yCjLtoNuoyIhhh9kmYOpFEU9su1EbHuZGN3OWr8M6NIjNHBurSWu/blbHAPQqGm7mUIokSxqTTp2Q==
 
 has-flag@^3.0.0:
   version "3.0.0"

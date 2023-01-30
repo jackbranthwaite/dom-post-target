@@ -2,10 +2,11 @@ import React, { createContext, ReactNode } from "react";
 import { useProvideAuth } from "./auth/useProvideAuth";
 
 interface AppContextInterface {
-  user: boolean;
+  user: object;
   login: (credentials: any) => Promise<any>;
   register: (details: any) => Promise<any>;
   logout: () => Promise<any>;
+  authStatus: string;
 }
 
 interface IChildren {
