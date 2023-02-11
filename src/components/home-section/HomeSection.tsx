@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
-import { logout } from "../../services/api/logout";
 import { Button } from "../button/Button";
 import { Target } from "../target/Target";
 import { TextInput } from "../text-input/TextInput";
@@ -9,9 +7,10 @@ import s from "./HomeSection.module.scss";
 
 export const HomeSection = () => {
   const answer = "fabricate";
-  const auth = useProvideAuth();
   const [guess, setGuess] = useState("");
   const [correct, setCorrect] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [guessProcessing, setGuessProcessing] = useState(false);
 
   const checkGuess = () => {
     if (guess === answer) {
@@ -25,7 +24,11 @@ export const HomeSection = () => {
   return (
     <div className={s.HomeSectionContainer}>
       <div className={s.ButtonWrapper}>
-        <Button secondary={true} onClick={auth.logout}>
+        <Button
+          secondary={true}
+          onClick={() => console.log("Logout")}
+          processing={processing}
+        >
           sign out
         </Button>
       </div>
@@ -47,7 +50,11 @@ export const HomeSection = () => {
             setGuess(e.target?.value)
           }
         />
-        <Button secondary={false} onClick={checkGuess}>
+        <Button
+          secondary={false}
+          onClick={checkGuess}
+          processing={guessProcessing}
+        >
           Check
         </Button>
       </div>

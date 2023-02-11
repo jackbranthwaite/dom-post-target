@@ -1,26 +1,20 @@
 import React, { useState } from "react";
-import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
-import { register } from "../../services/api/register";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./RegisterSection.module.scss";
 
 export const RegisterSection = () => {
-  const auth = useProvideAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [processing, setProcessing] = useState(false);
 
   const user = {
     name: name,
     email: email,
     password: password,
     password_confirmation: passwordConfirmation,
-  };
-
-  const submitUser = () => {
-    auth.register(user);
   };
 
   return (
@@ -61,7 +55,11 @@ export const RegisterSection = () => {
             setPasswordConfirmation(e.target?.value)
           }
         />
-        <Button secondary={false} onClick={submitUser}>
+        <Button
+          secondary={false}
+          onClick={() => console.log("Submit")}
+          processing={processing}
+        >
           register
         </Button>
       </div>
