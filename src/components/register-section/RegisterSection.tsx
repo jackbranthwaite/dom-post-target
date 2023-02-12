@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { register } from "../../services/api/register";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./RegisterSection.module.scss";
@@ -17,11 +18,15 @@ export const RegisterSection = () => {
     password_confirmation: passwordConfirmation,
   };
 
+  const handleRegister = async () => {
+    await register(user);
+  };
+
   return (
     <div className={s.RegisterSectionContainer}>
       <div className={s.RegisterContainer}>
         <div className={s.TitleWrapper}>
-          <h1 className={s.Title}>targle</h1>
+          <h1 className={s.Title}>target</h1>
         </div>
         <TextInput
           type={"text"}
@@ -57,7 +62,7 @@ export const RegisterSection = () => {
         />
         <Button
           secondary={false}
-          onClick={() => console.log("Submit")}
+          onClick={() => handleRegister()}
           processing={processing}
         >
           register

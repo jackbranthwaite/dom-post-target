@@ -3,6 +3,9 @@ import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./LoginSection.module.scss";
 import { get } from "lodash";
+import axios from "axios";
+import { API } from "../../services/api/axios";
+import { login } from "../../services/api/login";
 
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +18,10 @@ export const LoginSection = () => {
     password: password,
   };
 
+  const handleLogin = async () => {
+    await login(user);
+  };
+
   return (
     <div className={s.LoginSectionContainer}>
       <Button
@@ -25,7 +32,7 @@ export const LoginSection = () => {
         Sign Out
       </Button>
       <div className={s.LoginSectionWrapper}>
-        <h1 className={s.Title}>targle</h1>
+        <h1 className={s.Title}>target</h1>
         <TextInput
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -42,11 +49,7 @@ export const LoginSection = () => {
           type={"password"}
           title={"password"}
         />
-        <Button
-          processing={processing}
-          secondary={false}
-          onClick={() => console.log("Login")}
-        >
+        <Button processing={processing} secondary={false} onClick={handleLogin}>
           login
         </Button>
       </div>
