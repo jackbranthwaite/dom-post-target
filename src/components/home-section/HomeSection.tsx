@@ -45,24 +45,28 @@ export const HomeSection = () => {
         </div>
 
         <Target word={"arcebatfi"} answer={answer} correct={correct} />
-        <p className={s.Statement}>
-          there is at least one nine letter word - find one and stop your time
-        </p>
-        <TextInput
-          title=""
-          type="text"
-          value={guess}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setGuess(e.target?.value)
-          }
-        />
-        <Button
-          secondary={false}
-          onClick={checkGuess}
-          processing={guessProcessing}
-        >
-          Check
-        </Button>
+
+        <div className={s.ContentWrapper}>
+          <p className={s.Statement}>
+            there is at least one nine letter word - find one and stop your time
+          </p>
+
+          <TextInput
+            title=""
+            type="text"
+            value={guess}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setGuess(e.target?.value)
+            }
+          />
+          <Button
+            secondary={false}
+            onClick={checkGuess}
+            processing={guessProcessing}
+          >
+            Check
+          </Button>
+        </div>
       </div>
     </div>
   );

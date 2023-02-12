@@ -33,9 +33,7 @@
 }
 
 .SecondaryButton {
-  height: 50px;
   background-color: #f6f7f9;
-  border-radius: 50px;
   border: 2px solid #485570;
   width: 120px;
   height: 35px;
@@ -47,4 +45,13 @@
   color: #485570;
   font-size: 20px;
   cursor: pointer;
+
+  transition: all ease-in-out 0.5s;
+  background: linear-gradient(to left, #f6f7f9 50%, #485570 50%) right;
+  background-size: 200% 100%;
+
+  &:hover {
+    color: #fff;
+    background-position: left;
+  }
 }
