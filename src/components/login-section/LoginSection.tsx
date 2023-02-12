@@ -6,6 +6,7 @@ import { get } from "lodash";
 import axios from "axios";
 import { API } from "../../services/api/axios";
 import { login } from "../../services/api/login";
+import { logout } from "../../services/api/logout";
 
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,13 @@ export const LoginSection = () => {
   };
 
   const handleLogin = async () => {
-    await login(user);
+    const test = await login(user);
+    console.log(test);
+  };
+
+  const handleLogout = async () => {
+    const testing = await logout();
+    console.log(testing);
   };
 
   return (
@@ -27,7 +34,7 @@ export const LoginSection = () => {
       <Button
         processing={false}
         secondary={false}
-        onClick={() => console.log("Logout")}
+        onClick={() => handleLogout()}
       >
         Sign Out
       </Button>

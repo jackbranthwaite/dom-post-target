@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { logout } from "../../services/api/logout";
 import { Button } from "../button/Button";
 import { Target } from "../target/Target";
 import { TextInput } from "../text-input/TextInput";
@@ -21,12 +22,17 @@ export const HomeSection = () => {
     }
   };
 
+  const handleLogout = async () => {
+    const testing = await logout();
+    console.log(testing);
+  };
+
   return (
     <div className={s.HomeSectionContainer}>
       <div className={s.ButtonWrapper}>
         <Button
           secondary={true}
-          onClick={() => console.log("Logout")}
+          onClick={() => handleLogout()}
           processing={processing}
         >
           sign out
