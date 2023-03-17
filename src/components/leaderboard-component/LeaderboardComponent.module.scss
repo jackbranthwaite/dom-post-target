@@ -1,0 +1,21 @@
+@import "../../styles/config.scss";
+
+.LeaderboardWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TitleElement {
+  display: flex;
+}
+
+.UserElement {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Name {
+}

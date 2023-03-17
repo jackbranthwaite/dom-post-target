@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./LoginSection.module.scss";
@@ -7,6 +7,8 @@ import axios from "axios";
 import { API } from "../../services/api/axios";
 import { login } from "../../services/api/login";
 import { logout } from "../../services/api/logout";
+import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
+import { useRequireAuth } from "../../contexts/auth/useRequireAuth";
 
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
@@ -20,13 +22,11 @@ export const LoginSection = () => {
   };
 
   const handleLogin = async () => {
-    const test = await login(user);
-    console.log(test);
+    await login(user);
   };
 
   const handleLogout = async () => {
-    const testing = await logout();
-    console.log(testing);
+    await logout();
   };
 
   return (
