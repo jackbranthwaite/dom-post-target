@@ -13,7 +13,7 @@ const Home = () => {
     }
 
     if (context.user === false) {
-      router.push("/welcome");
+      router.push("/login");
     }
 
     if (context.user) {
