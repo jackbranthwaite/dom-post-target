@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { AuthContext } from "../AuthContext.js";
+import { AuthContext } from "../AuthContext";
 
-const useRequireAuth = (redirectUrl = "/login") => {
+export const useRequireAuth = (redirectUrl = "/login") => {
   const auth = useContext(AuthContext);
   const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mounted = true;
     if (mounted) {
       if (auth.user === false && router.pathname !== redirectUrl) {
@@ -19,5 +18,3 @@ const useRequireAuth = (redirectUrl = "/login") => {
 
   return auth;
 };
-
-export { useRequireAuth };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { logout } from "../../services/api/logout";
+import { useRequireAuth } from "../../contexts/auth/useRequireAuth";
 import { Button } from "../button/Button";
 import { Target } from "../target/Target";
 import { TextInput } from "../text-input/TextInput";
@@ -13,6 +13,8 @@ export const HomeSection = () => {
   const [processing, setProcessing] = useState(false);
   const [guessProcessing, setGuessProcessing] = useState(false);
 
+  const auth = useRequireAuth();
+
   const checkGuess = () => {
     if (guess === answer) {
       setCorrect(true);
@@ -22,19 +24,10 @@ export const HomeSection = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const testing = await logout();
-    console.log(testing);
-  };
-
   return (
     <div className={s.HomeSectionContainer}>
       <div className={s.ButtonWrapper}>
-        <Button
-          secondary={true}
-          onClick={() => handleLogout()}
-          processing={processing}
-        >
+        <Button secondary={true} onClick={auth.logout} processing={processing}>
           sign out
         </Button>
       </div>

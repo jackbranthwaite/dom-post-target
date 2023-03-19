@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "../button/Button";
 import { TextInput } from "../text-input/TextInput";
 import s from "./LoginSection.module.scss";
@@ -9,6 +9,7 @@ import { login } from "../../services/api/login";
 import { logout } from "../../services/api/logout";
 import { useProvideAuth } from "../../contexts/auth/useProvideAuth";
 import { useRequireAuth } from "../../contexts/auth/useRequireAuth";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const LoginSection = () => {
   const [email, setEmail] = useState("");
@@ -16,28 +17,19 @@ export const LoginSection = () => {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
 
+  const auth = useContext(AuthContext);
+
   const user = {
     email: email,
     password: password,
   };
 
   const handleLogin = async () => {
-    await login(user);
-  };
-
-  const handleLogout = async () => {
-    await logout();
+    await auth.login(user);
   };
 
   return (
     <div className={s.LoginSectionContainer}>
-      <Button
-        processing={false}
-        secondary={false}
-        onClick={() => handleLogout()}
-      >
-        Sign Out
-      </Button>
       <div className={s.LoginSectionWrapper}>
         <h1 className={s.Title}>target</h1>
         <TextInput
