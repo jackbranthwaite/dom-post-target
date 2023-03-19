@@ -5,13 +5,21 @@ import { csrf } from "./csrf";
  * Registers a new user
  * @param {} inputs Registration data
  */
-export const register = async (inputs) => {
+
+interface IInputs {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export const register = async (inputs: IInputs) => {
   console.log(await csrf());
   try {
     await csrf();
     const result = await API.post("/register", inputs);
     return result;
-  } catch (error) {
+  } catch (error: any) {
     return error.response;
   }
 };

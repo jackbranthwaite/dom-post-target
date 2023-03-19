@@ -6,13 +6,18 @@ import { csrf } from "./csrf";
  * @param { email: string, password: string } inputs The login credentials.
  */
 
-export const login = async (inputs) => {
+interface IInputs {
+  email: string;
+  password: string;
+}
+
+export const login = async (inputs: IInputs) => {
   const data = new URLSearchParams(inputs);
 
   try {
     await csrf();
     return await API.post("/login", data);
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       return error.response.data;
     } else {

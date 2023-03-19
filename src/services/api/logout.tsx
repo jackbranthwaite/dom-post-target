@@ -9,7 +9,7 @@ export const logout = async () => {
   try {
     await csrf();
     return await API.post("/logout");
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       return error.response.data;
     } else {
