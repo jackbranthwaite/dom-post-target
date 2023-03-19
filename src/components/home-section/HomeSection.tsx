@@ -7,7 +7,7 @@ import { Timer } from "../timer/Timer";
 import s from "./HomeSection.module.scss";
 
 export const HomeSection = () => {
-  const answer = "fabricate";
+  const answer: string = "fabricate";
   const [guess, setGuess] = useState("");
   const [correct, setCorrect] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -23,6 +23,16 @@ export const HomeSection = () => {
       setGuess("");
     }
   };
+  let test: Array<String> = [];
+  let testTwo: Array<String> = ["a", "b", "r", "i", "f", "t", "e", "c", "a"];
+
+  for (let i = 0; i < answer.length; i++) {
+    test.push(answer.charAt(i));
+  }
+
+  if (test.sort().join(",") === testTwo.sort().join(",")) {
+    console.log("same members");
+  } else console.log("not a match");
 
   return (
     <div className={s.HomeSectionContainer}>
