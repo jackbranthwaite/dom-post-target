@@ -16,7 +16,7 @@ Axios.interceptors.response.use(
  * Laravel API instance
  */
 export const API = Axios.create({
-  baseURL: process.env.VITE_PUBLIC_API_ENDPOINT,
+  baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
   headers: {
     Accept: "application/json",
   },
