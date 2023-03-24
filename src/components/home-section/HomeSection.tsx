@@ -1,38 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { useRequireAuth } from "../../contexts/auth/useRequireAuth";
-import { Button } from "../button/Button";
-import { Target } from "../target/Target";
-import { TextInput } from "../text-input/TextInput";
-import { Timer } from "../timer/Timer";
-import s from "./HomeSection.module.scss";
+import React, { useEffect, useState } from 'react';
+import { useRequireAuth } from '../../contexts/auth/useRequireAuth';
+import {
+  checkDictionary,
+  Dictionary,
+} from '../../services/dictionary/dictionary';
+import { Button } from '../button/Button';
+import { Target } from '../target/Target';
+import { TextInput } from '../text-input/TextInput';
+import { Timer } from '../timer/Timer';
+import s from './HomeSection.module.scss';
 
 export const HomeSection = () => {
-  const answer: string = "fabricate";
-  const [guess, setGuess] = useState("");
+  const answer: string = 'fabricate';
+  const [guess, setGuess] = useState('');
   const [correct, setCorrect] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [guessProcessing, setGuessProcessing] = useState(false);
+  const [error, setError] = useState('');
 
   const auth = useRequireAuth();
 
   const checkGuess = () => {
-    if (guess === answer) {
-      setCorrect(true);
+    let localAnswer: Array<String> = [];
+    let localGuess: Array<String> = [];
+
+    for (let i = 0; i < answer.length; i++) {
+      localAnswer.push(answer.charAt(i));
+    }
+
+    for (let i = 0; i < guess.length; i++) {
+      localGuess.push(guess.charAt(i));
+    }
+
+    if (localAnswer.sort().join(',') === localGuess.sort().join(',')) {
+      wordCheck();
     } else {
-      console.log("Try again m8");
-      setGuess("");
+      setError('The letters you entered do not match the letters given');
     }
   };
-  let test: Array<String> = [];
-  let testTwo: Array<String> = ["a", "b", "r", "i", "f", "t", "e", "c", "a"];
 
-  for (let i = 0; i < answer.length; i++) {
-    test.push(answer.charAt(i));
-  }
+  const wordCheck = async () => {
+    const word = await checkDictionary(guess);
+    if (word.status === 200) {
+      setCorrect(true);
+    } else {
+      setError("That's not a word sorry!");
+    }
+  };
 
-  if (test.sort().join(",") === testTwo.sort().join(",")) {
-    console.log("same members");
-  } else console.log("not a match");
+  useEffect(() => {}, []);
 
   return (
     <div className={s.HomeSectionContainer}>
@@ -47,7 +63,7 @@ export const HomeSection = () => {
           <Timer />
         </div>
 
-        <Target word={"arcebatfi"} answer={answer} correct={correct} />
+        <Target word={'arcebatfi'} answer={answer} correct={correct} />
 
         <div className={s.ContentWrapper}>
           <p className={s.Statement}>
@@ -55,13 +71,18 @@ export const HomeSection = () => {
           </p>
 
           <TextInput
-            title=""
-            type="text"
+            title=''
+            type='text'
             value={guess}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setGuess(e.target?.value)
             }
           />
+
+          <div className={s.ErrorWrapper}>
+            {error && <p className={s.ErrorText}>{error}</p>}
+          </div>
+
           <Button
             secondary={false}
             onClick={checkGuess}

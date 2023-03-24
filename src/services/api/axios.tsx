@@ -1,4 +1,11 @@
-import Axios from "axios";
+import Axios from 'axios';
+
+export const DICAPI = Axios.create({
+  baseURL: process.env.NEXT_PUBLIC_DICTIONARY_ENDPOINT,
+  headers: {
+    Accept: 'application/json',
+  },
+});
 
 Axios.defaults.withCredentials = true;
 
@@ -18,6 +25,6 @@ Axios.interceptors.response.use(
 export const API = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
   headers: {
-    Accept: "application/json",
+    Accept: 'application/json',
   },
 });
