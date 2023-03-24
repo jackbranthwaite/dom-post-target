@@ -35,7 +35,7 @@ export const HomeSection = () => {
     if (localAnswer.sort().join(',') === localGuess.sort().join(',')) {
       wordCheck();
     } else {
-      setError('The letters you entered do not match the letters given');
+      setError("The letters don't match");
     }
   };
 
@@ -48,7 +48,11 @@ export const HomeSection = () => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (guess.length < 1) {
+      setError('');
+    }
+  }, [guess]);
 
   return (
     <div className={s.HomeSectionContainer}>
