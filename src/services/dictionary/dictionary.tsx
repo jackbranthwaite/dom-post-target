@@ -1,12 +1,11 @@
 import React from 'react';
-import { DICAPI } from '../api/axios';
+import { DICAPI } from '../api/dic_axios';
 
 // interface IDictionary {
 //   word: string;
 // }
 
 export const checkDictionary = async (word) => {
-  console.log(word);
   try {
     return await DICAPI.get(`/en/${word}`);
   } catch (error) {

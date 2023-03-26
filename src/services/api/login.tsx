@@ -1,5 +1,5 @@
-import { API } from "./axios";
-import { csrf } from "./csrf";
+import { API } from './axios';
+import { csrf } from './csrf';
 
 /**
  * Logs in a user
@@ -16,12 +16,12 @@ export const login = async (inputs: IInputs) => {
 
   try {
     await csrf();
-    return await API.post("/login", data);
+    return await API.post('/login', data);
   } catch (error: any) {
     if (error.response) {
       return error.response.data;
     } else {
-      return { errors: "Could not complete the login" };
+      return { errors: 'Could not complete the login' };
     }
   }
 };

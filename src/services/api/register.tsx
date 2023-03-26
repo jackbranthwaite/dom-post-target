@@ -1,5 +1,5 @@
-import { API } from "./axios";
-import { csrf } from "./csrf";
+import { API } from './axios';
+import { csrf } from './csrf';
 
 /**
  * Registers a new user
@@ -14,10 +14,9 @@ interface IInputs {
 }
 
 export const register = async (inputs: IInputs) => {
-  console.log(await csrf());
   try {
     await csrf();
-    const result = await API.post("/register", inputs);
+    const result = await API.post('/register', inputs);
     return result;
   } catch (error: any) {
     return error.response;

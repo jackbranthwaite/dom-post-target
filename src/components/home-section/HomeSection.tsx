@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRequireAuth } from '../../contexts/auth/useRequireAuth';
+import { addLetters } from '../../services/api/add_letters';
 import {
   checkDictionary,
   Dictionary,
@@ -17,6 +18,8 @@ export const HomeSection = () => {
   const [processing, setProcessing] = useState(false);
   const [guessProcessing, setGuessProcessing] = useState(false);
   const [error, setError] = useState('');
+
+  const [newLetters, setNewLetters] = useState('');
 
   const auth = useRequireAuth();
 
@@ -46,6 +49,11 @@ export const HomeSection = () => {
     } else {
       setError("That's not a word sorry!");
     }
+  };
+
+  const addLocalLetters = async () => {
+    const letters = await addLetters({ daily_letters: newLetters });
+    console.log(letters);
   };
 
   useEffect(() => {
@@ -95,6 +103,22 @@ export const HomeSection = () => {
             Check
           </Button>
         </div>
+
+        <TextInput
+          title=''
+          type='text'
+          value={newLetters}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNewLetters(e.target?.value)
+          }
+        />
+        <Button
+          secondary={false}
+          onClick={addLocalLetters}
+          processing={guessProcessing}
+        >
+          Add
+        </Button>
       </div>
     </div>
   );
