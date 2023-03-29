@@ -52,7 +52,7 @@ export const HomeSection = () => {
   };
 
   const addLocalLetters = async () => {
-    const letters = await addLetters({ daily_letters: newLetters });
+    const letters = await addLetters({ letters: newLetters });
     console.log(letters);
   };
 
