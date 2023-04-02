@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
+import { LoadingSpinner } from '../loading-page/LoadingPage';
 import s from './Button.module.scss';
 
 interface ButtonProps {

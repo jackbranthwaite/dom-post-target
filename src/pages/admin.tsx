@@ -1,24 +1,30 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { AdminPanel } from '../components/admin-panel/AdminPanel';
+import { LoadingSpinner } from '../components/loading-page/LoadingPage';
 import { useProvideAuth } from '../contexts/auth/useProvideAuth';
 
 const Admin = () => {
   const auth = useProvideAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!auth.user?.is_admin) {
-      router.push('/');
-    }
-  }, []);
-
-  if (auth.user)
+  if (!auth.user) {
     return (
-      <div>
-        <AdminPanel></AdminPanel>
-      </div>
+      <>
+        <LoadingSpinner />
+      </>
     );
+  }
+
+  if (auth.user?.is_admin) {
+    return (
+      <>
+        <AdminPanel />
+      </>
+    );
+  } else {
+    router.push('/');
+  }
 };
 
 export default Admin;

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRequireAuth } from '../../contexts/auth/useRequireAuth';
 import { addLetters } from '../../services/api/add_letters';
 import { getLetters } from '../../services/api/get_letters';
-import {
-  checkDictionary,
-  Dictionary,
-} from '../../services/dictionary/dictionary';
+import { checkDictionary } from '../../services/dictionary/dictionary';
 import { Button } from '../button/Button';
 import { Target } from '../target/Target';
 import { TextInput } from '../text-input/TextInput';
@@ -20,10 +17,15 @@ export const HomeSection = () => {
   const [processing, setProcessing] = useState(false);
   const [guessProcessing, setGuessProcessing] = useState(false);
   const [error, setError] = useState('');
+  const [noLetters, setNoLetters] = useState(false);
 
   const requestLetters = async () => {
     const localLetters = await getLetters();
-    setLetters(localLetters?.data[0].letters);
+    if (localLetters?.data[0]) {
+      setLetters(localLetters?.data[0].letters);
+    } else {
+      setNoLetters(true);
+    }
   };
 
   useEffect(() => {
@@ -81,7 +83,12 @@ export const HomeSection = () => {
           <Timer />
         </div>
 
-        <Target word={letters} answer={answer} correct={correct} />
+        <Target
+          word={letters}
+          answer={answer}
+          correct={correct}
+          noLetters={noLetters}
+        />
 
         <div className={s.ContentWrapper}>
           <p className={s.Statement}>

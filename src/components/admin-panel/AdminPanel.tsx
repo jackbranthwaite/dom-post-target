@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { addLetters } from '../../services/api/add_letters';
 import { Button } from '../button/Button';
-import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
+import { LoadingSpinner } from '../loading-page/LoadingPage';
 import { TextInput } from '../text-input/TextInput';
 import s from './AdminPanel.module.scss';
 
