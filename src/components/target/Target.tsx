@@ -8,6 +8,7 @@ interface TargetProps {
 }
 
 export const Target = ({ word, answer, correct }: TargetProps) => {
+  const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -20,7 +21,15 @@ export const Target = ({ word, answer, correct }: TargetProps) => {
     };
   }, [correct]);
 
-  if (!word) return;
+  if (!word) {
+    return (
+      <div className={s.TargetContainer}>
+        {empty.map((i: number) => {
+          return <div className={s.LetterBox} key={i}></div>;
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className={s.TargetContainer}>

@@ -62,11 +62,6 @@ export const HomeSection = () => {
     }
   };
 
-  const addLocalLetters = async () => {
-    const letters = await addLetters({ letters: newLetters });
-    console.log(letters);
-  };
-
   useEffect(() => {
     if (guess.length < 1) {
       setError('');
@@ -114,22 +109,6 @@ export const HomeSection = () => {
             Check
           </Button>
         </div>
-
-        <TextInput
-          title=''
-          type='text'
-          value={newLetters}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setNewLetters(e.target?.value)
-          }
-        />
-        <Button
-          secondary={false}
-          onClick={addLocalLetters}
-          processing={guessProcessing}
-        >
-          Add
-        </Button>
       </div>
     </div>
   );

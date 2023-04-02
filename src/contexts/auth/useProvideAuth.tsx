@@ -1,12 +1,12 @@
-import React from "react";
-import { login as APILogin } from "../../services/api/login";
-import { logout as APILogout } from "../../services/api/logout";
-import { register as APIRegister } from "../../services/api/register";
-import { getUser } from "../../services/api/user";
+import React from 'react';
+import { login as APILogin } from '../../services/api/login';
+import { logout as APILogout } from '../../services/api/logout';
+import { register as APIRegister } from '../../services/api/register';
+import { getUser } from '../../services/api/user';
 
 export const useProvideAuth = () => {
   const [user, setUser] = React.useState<Object | null>(null);
-  const [authStatus, setAuthStatus] = React.useState("pending");
+  const [authStatus, setAuthStatus] = React.useState('pending');
 
   const login = async (credentials) => {
     const data = await APILogin(credentials);
@@ -72,7 +72,7 @@ export const useProvideAuth = () => {
     let mounted = true;
 
     if (mounted) {
-      setAuthStatus(user ? "authenticated" : "unauthenticated");
+      setAuthStatus(user ? 'authenticated' : 'unauthenticated');
     }
     return () => {
       mounted = false;

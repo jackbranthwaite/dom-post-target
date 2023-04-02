@@ -1,5 +1,6 @@
-import React, { ReactNode } from "react";
-import s from "./Button.module.scss";
+import React, { ReactNode, useState } from 'react';
+import { LoadingSpinner } from '../loading-spinner/LoadingSpinner';
+import s from './Button.module.scss';
 
 interface ButtonProps {
   children: ReactNode;
@@ -14,10 +15,12 @@ export const Button = ({
   secondary,
   processing,
 }: ButtonProps) => {
+  const [hover, setHover] = useState(false);
   return (
     <div
       className={s.ButtonContainer}
-      style={processing ? { opacity: 0.6 } : { opacity: 1 }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <button
         className={!secondary ? s.Button : s.SecondaryButton}
@@ -25,6 +28,7 @@ export const Button = ({
       >
         {children}
       </button>
+      {/* {processing && <LoadingSpinner color={hover ? '#fff' : '#485570'} />} */}
     </div>
   );
 };
