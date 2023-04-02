@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import s from "./Target.module.scss";
+import React, { useEffect } from 'react';
+import s from './Target.module.scss';
 
 interface TargetProps {
   word: string;
@@ -12,7 +12,7 @@ export const Target = ({ word, answer, correct }: TargetProps) => {
     let mounted = true;
     if (mounted) {
       if (correct) {
-        console.log("You fucking won");
+        console.log('You fucking won');
       }
     }
     return () => {
@@ -20,9 +20,11 @@ export const Target = ({ word, answer, correct }: TargetProps) => {
     };
   }, [correct]);
 
+  if (!word) return;
+
   return (
     <div className={s.TargetContainer}>
-      {word.split("").map((letter, i) => {
+      {word.split('').map((letter, i) => {
         return (
           <div className={s.LetterBox} key={letter + i}>
             <p className={s.Letter}>{letter}</p>

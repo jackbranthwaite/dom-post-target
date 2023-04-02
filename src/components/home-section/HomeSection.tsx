@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRequireAuth } from '../../contexts/auth/useRequireAuth';
 import { addLetters } from '../../services/api/add_letters';
+import { getLetters } from '../../services/api/get_letters';
 import {
   checkDictionary,
   Dictionary,
@@ -13,11 +14,21 @@ import s from './HomeSection.module.scss';
 
 export const HomeSection = () => {
   const answer: string = 'fabricate';
+  const [letters, setLetters] = useState('');
   const [guess, setGuess] = useState('');
   const [correct, setCorrect] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [guessProcessing, setGuessProcessing] = useState(false);
   const [error, setError] = useState('');
+
+  const requestLetters = async () => {
+    const localLetters = await getLetters();
+    setLetters(localLetters?.data[0].letters);
+  };
+
+  useEffect(() => {
+    requestLetters();
+  }, []);
 
   const [newLetters, setNewLetters] = useState('');
 
@@ -75,7 +86,7 @@ export const HomeSection = () => {
           <Timer />
         </div>
 
-        <Target word={'arcebatfi'} answer={answer} correct={correct} />
+        <Target word={letters} answer={answer} correct={correct} />
 
         <div className={s.ContentWrapper}>
           <p className={s.Statement}>
