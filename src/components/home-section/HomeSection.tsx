@@ -10,7 +10,6 @@ import { Timer } from '../timer/Timer';
 import s from './HomeSection.module.scss';
 
 export const HomeSection = () => {
-  const answer: string = 'fabricate';
   const [letters, setLetters] = useState('');
   const [guess, setGuess] = useState('');
   const [correct, setCorrect] = useState(false);
@@ -37,11 +36,12 @@ export const HomeSection = () => {
   const auth = useRequireAuth();
 
   const checkGuess = () => {
+    setError('');
     let localAnswer: Array<String> = [];
     let localGuess: Array<String> = [];
 
-    for (let i = 0; i < answer.length; i++) {
-      localAnswer.push(answer.charAt(i));
+    for (let i = 0; i < letters.length; i++) {
+      localAnswer.push(letters.charAt(i));
     }
 
     for (let i = 0; i < guess.length; i++) {
@@ -83,12 +83,7 @@ export const HomeSection = () => {
           <Timer />
         </div>
 
-        <Target
-          word={letters}
-          answer={answer}
-          correct={correct}
-          noLetters={noLetters}
-        />
+        <Target word={letters} correct={correct} noLetters={noLetters} />
 
         <div className={s.ContentWrapper}>
           <p className={s.Statement}>

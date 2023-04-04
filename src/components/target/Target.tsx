@@ -3,12 +3,11 @@ import s from './Target.module.scss';
 
 interface TargetProps {
   word: string;
-  answer: string;
   correct: boolean;
   noLetters: boolean;
 }
 
-export const Target = ({ word, answer, correct, noLetters }: TargetProps) => {
+export const Target = ({ word, correct, noLetters }: TargetProps) => {
   const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   useEffect(() => {
     let mounted = true;
