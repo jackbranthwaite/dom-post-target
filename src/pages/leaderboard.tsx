@@ -1,5 +1,5 @@
-import React from "react";
-import { LeaderboardComponent } from "../components/leaderboard-component/LeaderboardComponent";
+import React from 'react';
+import { LeaderboardComponent } from '../components/leaderboard-component/LeaderboardComponent';
 
 const Leaderboard = () => {
   return (

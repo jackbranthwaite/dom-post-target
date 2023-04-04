@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './LeaderboardComponent.module.scss';
 import { UserCard } from './board-component/UserCard';
+import { SignOut } from '../sign-out/SignOut';
 
 export const LeaderboardComponent = () => {
   const users = [
@@ -48,6 +49,7 @@ export const LeaderboardComponent = () => {
 
   return (
     <div className={s.LeaderboardContainer}>
+      <SignOut />
       <div className={s.LeaderboardWrapper}>
         <div className={s.LeaderboardTitleWrapper}>
           <h2 className={s.Title}>leaderboard</h2>

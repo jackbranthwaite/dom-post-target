@@ -8,6 +8,7 @@ import { Target } from '../target/Target';
 import { TextInput } from '../text-input/TextInput';
 import { Timer } from '../timer/Timer';
 import s from './HomeSection.module.scss';
+import { SignOut } from '../sign-out/SignOut';
 
 export const HomeSection = () => {
   const [letters, setLetters] = useState('');
@@ -72,11 +73,7 @@ export const HomeSection = () => {
 
   return (
     <div className={s.HomeSectionContainer}>
-      <div className={s.ButtonWrapper}>
-        <Button secondary={true} onClick={auth.logout} processing={processing}>
-          sign out
-        </Button>
-      </div>
+      <SignOut />
       <div className={s.HomeSectionWrapper}>
         <div className={s.TitleWrapper}>
           <h1 className={s.Title}>target</h1>

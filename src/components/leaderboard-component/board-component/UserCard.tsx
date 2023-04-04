@@ -13,7 +13,14 @@ interface IProps {
 
 export const UserCard = ({ user, position }: IProps) => {
   return (
-    <div className={s.BoardContainer}>
+    <div
+      className={s.BoardContainer}
+      style={
+        position === 0
+          ? { backgroundColor: 'rgba(224, 205, 103, 0.4)' }
+          : undefined
+      }
+    >
       <div className={s.MainSection}>
         <div className={s.SectionWrapper}>
           <p className={s.Position}>{position + 1}.</p>

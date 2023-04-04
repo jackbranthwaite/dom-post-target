@@ -6,7 +6,7 @@ interface ButtonProps {
   children: ReactNode;
   onClick: () => void;
   secondary: boolean;
-  processing: boolean;
+  processing: boolean | undefined;
 }
 
 export const Button = ({
