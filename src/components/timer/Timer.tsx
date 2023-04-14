@@ -11,7 +11,6 @@ export const Timer = () => {
     const splitter = new Date();
     const time = splitter.toString().split(' ');
     time[4] = '23:59';
-
     const date = time.join(' ');
 
     const difference = +new Date(date) - +new Date();
