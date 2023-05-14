@@ -9,6 +9,7 @@ import { TextInput } from '../text-input/TextInput';
 import { Timer } from '../timer/Timer';
 import s from './HomeSection.module.scss';
 import { SignOut } from '../sign-out/SignOut';
+import { submitTime } from '../../services/api/submit_correct';
 
 export const HomeSection = () => {
   const [letters, setLetters] = useState('');
@@ -18,6 +19,11 @@ export const HomeSection = () => {
   const [guessProcessing, setGuessProcessing] = useState(false);
   const [error, setError] = useState('');
   const [noLetters, setNoLetters] = useState(false);
+  const [currentTime, setCurrentTime] = useState({
+    hours: '',
+    minutes: '',
+    seconds: '',
+  });
 
   const requestLetters = async () => {
     const localLetters = await getLetters();
@@ -59,6 +65,11 @@ export const HomeSection = () => {
   const wordCheck = async () => {
     const word = await checkDictionary(guess);
     if (word.status === 200) {
+      await submitTime({
+        hours: parseInt(currentTime.hours),
+        minutes: parseInt(currentTime.minutes),
+        seconds: parseInt(currentTime.seconds),
+      });
       setCorrect(true);
     } else {
       setError("That's not a word sorry!");
@@ -77,7 +88,7 @@ export const HomeSection = () => {
       <div className={s.HomeSectionWrapper}>
         <div className={s.TitleWrapper}>
           <h1 className={s.Title}>target</h1>
-          <Timer />
+          <Timer currentTime={(e: any) => setCurrentTime(e)} />
         </div>
 
         <Target word={letters} correct={correct} noLetters={noLetters} />
@@ -98,6 +109,10 @@ export const HomeSection = () => {
 
           <div className={s.ErrorWrapper}>
             {error && <p className={s.ErrorText}>{error}</p>}
+          </div>
+
+          <div className={s.CorrectWrapper}>
+            {correct && <p className={s.CorrectText}>correct!</p>}
           </div>
 
           <Button

@@ -14,7 +14,7 @@ export const Target = ({ word, correct, noLetters }: TargetProps) => {
 
   const fadeIn = () => {
     boxRefs.current?.map((i, j) => {
-      const tl = gsap.timeline({ delay: j * 0.5 });
+      const tl = gsap.timeline({ delay: j * 0.2 });
       tl.to(boxRefs?.current[j], {
         backgroundColor: 'rgba(0, 270, 0, 0.2)',
         duration: 0.5,
@@ -26,7 +26,6 @@ export const Target = ({ word, correct, noLetters }: TargetProps) => {
     let mounted = true;
     if (mounted) {
       if (correct) {
-        console.log('You fucking won');
         fadeIn();
       }
     }

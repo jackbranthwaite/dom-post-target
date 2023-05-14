@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import s from './Timer.module.scss';
 
-export const Timer = () => {
+export const Timer = ({ currentTime }: { currentTime: (e: any) => void }) => {
   interface ITimer {
     hours: string;
     minutes: string;
@@ -38,6 +38,7 @@ export const Timer = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      currentTime(calculateTimeLeft());
       setTimeLeft(calculateTimeLeft());
     }, 1000);
   });

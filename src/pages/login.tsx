@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { LoginSection } from "../components/login-section/LoginSection";
-import { useRequireGuest } from "../contexts/auth/useRequireGuest";
+import { LoginSection } from '../components/login-section/LoginSection';
+import { useRequireGuest } from '../contexts/auth/useRequireGuest';
 
 const Login = () => {
   const auth = useRequireGuest();
