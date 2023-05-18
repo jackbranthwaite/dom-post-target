@@ -9,13 +9,14 @@ import { TextInput } from '../text-input/TextInput';
 import { Timer } from '../timer/Timer';
 import s from './HomeSection.module.scss';
 import { SignOut } from '../sign-out/SignOut';
-import { submitTime } from '../../services/api/submit_correct';
+import { checkComplete, submitTime } from '../../services/api/submit_correct';
+import { LoadingSpinner } from '../loading-page/LoadingPage';
 
 export const HomeSection = () => {
   const [letters, setLetters] = useState('');
   const [guess, setGuess] = useState('');
   const [correct, setCorrect] = useState(false);
-  const [processing, setProcessing] = useState(false);
+  const [processing, setProcessing] = useState(true);
   const [guessProcessing, setGuessProcessing] = useState(false);
   const [error, setError] = useState('');
   const [noLetters, setNoLetters] = useState(false);
@@ -24,6 +25,7 @@ export const HomeSection = () => {
     minutes: '',
     seconds: '',
   });
+  const [completed, setCompleted] = useState();
 
   const requestLetters = async () => {
     const localLetters = await getLetters();
@@ -34,13 +36,22 @@ export const HomeSection = () => {
     }
   };
 
+  const alreadyComplete = async () => {
+    const check = await checkComplete();
+    if (check?.data) {
+      console.log(check.data[0]);
+      setCompleted(check?.data[0]);
+      setCorrect(true);
+      setProcessing(false);
+    } else {
+      setProcessing(false);
+    }
+  };
+
   useEffect(() => {
     requestLetters();
+    alreadyComplete();
   }, []);
-
-  const [newLetters, setNewLetters] = useState('');
-
-  const auth = useRequireAuth();
 
   const checkGuess = () => {
     setError('');
@@ -66,11 +77,12 @@ export const HomeSection = () => {
     const word = await checkDictionary(guess);
     if (word.status === 200) {
       await submitTime({
-        hours: parseInt(currentTime.hours),
-        minutes: parseInt(currentTime.minutes),
-        seconds: parseInt(currentTime.seconds),
+        hours: 24 - parseInt(currentTime.hours),
+        minutes: 60 - parseInt(currentTime.minutes),
+        seconds: 60 - parseInt(currentTime.seconds),
       });
       setCorrect(true);
+      alreadyComplete();
     } else {
       setError("That's not a word sorry!");
     }
@@ -81,48 +93,64 @@ export const HomeSection = () => {
       setError('');
     }
   }, [guess]);
-
+  if (processing)
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
   return (
     <div className={s.HomeSectionContainer}>
       <SignOut />
       <div className={s.HomeSectionWrapper}>
         <div className={s.TitleWrapper}>
           <h1 className={s.Title}>target</h1>
-          <Timer currentTime={(e: any) => setCurrentTime(e)} />
+          {!completed && <Timer currentTime={(e: any) => setCurrentTime(e)} />}
         </div>
 
         <Target word={letters} correct={correct} noLetters={noLetters} />
 
-        <div className={s.ContentWrapper}>
-          <p className={s.Statement}>
-            there is at least one nine letter word - find one and stop your time
-          </p>
+        {!completed && (
+          <div className={s.ContentWrapper}>
+            <p className={s.Statement}>
+              there is at least one nine letter word - find one and stop your
+              time
+            </p>
 
-          <TextInput
-            title=''
-            type='text'
-            value={guess}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setGuess(e.target?.value)
-            }
-          />
+            <TextInput
+              title=''
+              type='text'
+              value={guess}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setGuess(e.target?.value)
+              }
+            />
 
-          <div className={s.ErrorWrapper}>
-            {error && <p className={s.ErrorText}>{error}</p>}
+            <div className={s.ErrorWrapper}>
+              {error && <p className={s.ErrorText}>{error}</p>}
+            </div>
+
+            <div className={s.CorrectWrapper}>
+              {correct && <p className={s.CorrectText}>correct!</p>}
+            </div>
+
+            <Button
+              secondary={false}
+              onClick={checkGuess}
+              processing={guessProcessing}
+            >
+              Check
+            </Button>
           </div>
-
-          <div className={s.CorrectWrapper}>
-            {correct && <p className={s.CorrectText}>correct!</p>}
+        )}
+        {correct && completed && (
+          <div className={s.ContentWrapper}>
+            <p className={s.Correct}>grimacing</p>
+            <p className={s.TimeTaken}>
+              time: {completed.hours}:{completed.minutes}:{completed.seconds}
+            </p>
           </div>
-
-          <Button
-            secondary={false}
-            onClick={checkGuess}
-            processing={guessProcessing}
-          >
-            Check
-          </Button>
-        </div>
+        )}
       </div>
     </div>
   );

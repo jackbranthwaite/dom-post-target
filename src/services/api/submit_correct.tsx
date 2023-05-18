@@ -17,3 +17,16 @@ export const submitTime = async (data: object) => {
     }
   }
 };
+
+export const checkComplete = async () => {
+  try {
+    await csrf();
+    return await API.get('/api/correct-guess');
+  } catch (error: any) {
+    if (error.response) {
+      console.log(error.response.data);
+    } else {
+      return { errors: 'Could not submit time' };
+    }
+  }
+};
