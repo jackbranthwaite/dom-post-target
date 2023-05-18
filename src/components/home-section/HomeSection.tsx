@@ -38,7 +38,7 @@ export const HomeSection = () => {
 
   const alreadyComplete = async () => {
     const check = await checkComplete();
-    if (check?.data) {
+    if (check?.data[0]) {
       console.log(check.data[0]);
       setCompleted(check?.data[0]);
       setCorrect(true);
@@ -80,6 +80,7 @@ export const HomeSection = () => {
         hours: 24 - parseInt(currentTime.hours),
         minutes: 60 - parseInt(currentTime.minutes),
         seconds: 60 - parseInt(currentTime.seconds),
+        guess: guess,
       });
       setCorrect(true);
       alreadyComplete();
@@ -145,7 +146,7 @@ export const HomeSection = () => {
         )}
         {correct && completed && (
           <div className={s.ContentWrapper}>
-            <p className={s.Correct}>grimacing</p>
+            <p className={s.Correct}>{completed.guess}</p>
             <p className={s.TimeTaken}>
               time: {completed.hours}:{completed.minutes}:{completed.seconds}
             </p>
