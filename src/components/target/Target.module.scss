@@ -1,4 +1,4 @@
-@import "../../styles/config";
+@import '../../styles/config';
 
 .TargetContainer {
   height: 25vw;
@@ -15,19 +15,4 @@
   max-width: 400px;
   min-width: 250px;
   width: 25vw;
-}
-
-.LetterBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  border-bottom: 3px solid #485570;
-  border-right: 3px solid #485570;
-}
-
-.Letter {
-  text-transform: capitalize;
-  font-size: clamp(3rem, 4vw, 6rem);
 }

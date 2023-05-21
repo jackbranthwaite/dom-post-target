@@ -1,0 +1,16 @@
+@import '../../../styles/config';
+.LetterBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid #485570;
+  border-right: 3px solid #485570;
+  cursor: pointer;
+}
+
+.Letter {
+  text-transform: capitalize;
+  font-size: clamp(3rem, 4vw, 6rem);
+}

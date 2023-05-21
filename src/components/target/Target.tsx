@@ -1,14 +1,21 @@
 import React, { createRef, useEffect, useRef } from 'react';
 import s from './Target.module.scss';
 import { gsap } from 'gsap';
+import { LetterItem } from './letter-item/LetterItem';
 
 interface TargetProps {
   word: string;
   correct: boolean;
   noLetters: boolean;
+  addLetter: (e: string) => void;
 }
 
-export const Target = ({ word, correct, noLetters }: TargetProps) => {
+export const Target = ({
+  word,
+  correct,
+  noLetters,
+  addLetter,
+}: TargetProps) => {
   const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const boxRefs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -48,13 +55,7 @@ export const Target = ({ word, correct, noLetters }: TargetProps) => {
     <div className={s.TargetContainer}>
       {word.split('').map((letter, i) => {
         return (
-          <div
-            className={s.LetterBox}
-            key={letter + i}
-            ref={(el) => (boxRefs.current[i] = el)}
-          >
-            <p className={s.Letter}>{letter}</p>
-          </div>
+          <LetterItem letter={letter} key={i} addLetter={(e) => addLetter(e)} />
         );
       })}
     </div>

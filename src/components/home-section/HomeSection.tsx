@@ -12,6 +12,13 @@ import { SignOut } from '../sign-out/SignOut';
 import { checkComplete, submitTime } from '../../services/api/submit_correct';
 import { LoadingSpinner } from '../loading-page/LoadingPage';
 
+interface ICompleted {
+  hours: string;
+  minutes: string;
+  seconds: string;
+  guess: string;
+}
+
 export const HomeSection = () => {
   const [letters, setLetters] = useState('');
   const [guess, setGuess] = useState('');
@@ -25,7 +32,7 @@ export const HomeSection = () => {
     minutes: '',
     seconds: '',
   });
-  const [completed, setCompleted] = useState();
+  const [completed, setCompleted] = useState<ICompleted>();
 
   const requestLetters = async () => {
     const localLetters = await getLetters();
@@ -109,7 +116,12 @@ export const HomeSection = () => {
           {!completed && <Timer currentTime={(e: any) => setCurrentTime(e)} />}
         </div>
 
-        <Target word={letters} correct={correct} noLetters={noLetters} />
+        <Target
+          word={letters}
+          correct={correct}
+          noLetters={noLetters}
+          addLetter={(e) => setGuess(guess + e)}
+        />
 
         {!completed && (
           <div className={s.ContentWrapper}>
@@ -118,14 +130,7 @@ export const HomeSection = () => {
               time
             </p>
 
-            <TextInput
-              title=''
-              type='text'
-              value={guess}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setGuess(e.target?.value)
-              }
-            />
+            <h1 className={s.CurrentWord}>{guess}</h1>
 
             <div className={s.ErrorWrapper}>
               {error && <p className={s.ErrorText}>{error}</p>}
@@ -146,7 +151,7 @@ export const HomeSection = () => {
         )}
         {correct && completed && (
           <div className={s.ContentWrapper}>
-            <p className={s.Correct}>{completed.guess}</p>
+            <h1 className={s.CurrentWord}>{completed.guess}</h1>
             <p className={s.TimeTaken}>
               time: {completed.hours}:{completed.minutes}:{completed.seconds}
             </p>
