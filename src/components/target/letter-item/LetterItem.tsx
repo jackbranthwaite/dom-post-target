@@ -5,9 +5,11 @@ import { gsap } from 'gsap';
 export const LetterItem = ({
   letter,
   addLetter,
+  reset,
 }: {
   letter: string;
   addLetter: (e: string) => void;
+  reset: boolean;
 }) => {
   const [used, setUsed] = useState(false);
   const letterRef = useRef(null);
@@ -21,6 +23,19 @@ export const LetterItem = ({
     }
   };
 
+  const animateOut = () => {
+    gsap.to(letterRef.current, {
+      backgroundColor: 'transparent',
+      duration: 0.5,
+      onComplete: () => setUsed(false),
+    });
+  };
+  useEffect(() => {
+    if (reset) {
+      animateOut();
+    }
+  }, [reset]);
+
   const animateClick = () => {
     if (letterRef.current) {
       console.log('Help');
@@ -31,6 +46,7 @@ export const LetterItem = ({
       });
     }
   };
+
   return (
     <div
       className={s.LetterBox}

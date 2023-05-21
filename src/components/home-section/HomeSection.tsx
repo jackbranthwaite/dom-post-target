@@ -33,6 +33,7 @@ export const HomeSection = () => {
     seconds: '',
   });
   const [completed, setCompleted] = useState<ICompleted>();
+  const [reset, setReset] = useState(false);
 
   const requestLetters = async () => {
     const localLetters = await getLetters();
@@ -101,6 +102,16 @@ export const HomeSection = () => {
       setError('');
     }
   }, [guess]);
+
+  useEffect(() => {
+    if (reset) {
+      setGuess('');
+      setTimeout(() => {
+        setReset(false);
+      }, 2);
+    }
+  }, [reset]);
+
   if (processing)
     return (
       <>
@@ -121,6 +132,7 @@ export const HomeSection = () => {
           correct={correct}
           noLetters={noLetters}
           addLetter={(e) => setGuess(guess + e)}
+          reset={reset}
         />
 
         {!completed && (
@@ -140,13 +152,18 @@ export const HomeSection = () => {
               {correct && <p className={s.CorrectText}>correct!</p>}
             </div>
 
-            <Button
-              secondary={false}
-              onClick={checkGuess}
-              processing={guessProcessing}
-            >
-              Check
-            </Button>
+            <div className={s.Buttons}>
+              <Button
+                onClick={() => setReset(true)}
+                processing={false}
+                secondary={false}
+              >
+                clear
+              </Button>
+              <Button secondary={false} onClick={checkGuess} processing={false}>
+                check
+              </Button>
+            </div>
           </div>
         )}
         {correct && completed && (

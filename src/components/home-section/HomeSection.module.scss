@@ -33,7 +33,11 @@
   text-align: center;
   margin-top: 2rem;
 }
-
+.Buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
 .Button {
   height: 50px;
   background-color: #485570;
