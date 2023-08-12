@@ -6,10 +6,12 @@ export const LetterItem = ({
   letter,
   addLetter,
   reset,
+  correct,
 }: {
   letter: string;
   addLetter: (e: string) => void;
   reset: boolean;
+  correct: boolean;
 }) => {
   const [used, setUsed] = useState(false);
   const letterRef = useRef(null);
@@ -38,7 +40,6 @@ export const LetterItem = ({
 
   const animateClick = () => {
     if (letterRef.current) {
-      console.log('Help');
       gsap.to(letterRef.current, {
         backgroundColor: 'rgba(255, 255, 0, 0.2)',
         duration: 0.5,
@@ -46,6 +47,27 @@ export const LetterItem = ({
       });
     }
   };
+
+  const correctAnimation = () => {
+    if (letterRef.current) {
+      gsap.to(letterRef.current, {
+        backgroundColor: 'rgba(0, 270, 0, 0.2)',
+        duration: 0.5,
+      });
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      if (correct) {
+        correctAnimation();
+      }
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [correct]);
 
   return (
     <div

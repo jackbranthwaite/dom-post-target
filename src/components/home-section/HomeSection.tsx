@@ -137,20 +137,11 @@ export const HomeSection = () => {
 
         {!completed && (
           <div className={s.ContentWrapper}>
+            <h1 className={s.CurrentWord}>{guess}</h1>
             <p className={s.Statement}>
               there is at least one nine letter word - find one and stop your
               time
             </p>
-
-            <h1 className={s.CurrentWord}>{guess}</h1>
-
-            <div className={s.ErrorWrapper}>
-              {error && <p className={s.ErrorText}>{error}</p>}
-            </div>
-
-            <div className={s.CorrectWrapper}>
-              {correct && <p className={s.CorrectText}>correct!</p>}
-            </div>
 
             <div className={s.Buttons}>
               <Button
@@ -163,6 +154,13 @@ export const HomeSection = () => {
               <Button secondary={false} onClick={checkGuess} processing={false}>
                 check
               </Button>
+            </div>
+            <div className={s.ErrorWrapper}>
+              {error && <p className={s.ErrorText}>{error}</p>}
+            </div>
+
+            <div className={s.CorrectWrapper}>
+              {correct && <p className={s.CorrectText}>correct!</p>}
             </div>
           </div>
         )}

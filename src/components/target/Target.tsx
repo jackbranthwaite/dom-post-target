@@ -19,29 +19,6 @@ export const Target = ({
   reset,
 }: TargetProps) => {
   const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const boxRefs = useRef<Array<HTMLDivElement | null>>([]);
-
-  const fadeIn = () => {
-    boxRefs.current?.map((i, j) => {
-      const tl = gsap.timeline({ delay: j * 0.2 });
-      tl.to(boxRefs?.current[j], {
-        backgroundColor: 'rgba(0, 270, 0, 0.2)',
-        duration: 0.5,
-      });
-    });
-  };
-
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      if (correct) {
-        fadeIn();
-      }
-    }
-    return () => {
-      mounted = false;
-    };
-  }, [correct]);
 
   if (!word) {
     return (
@@ -62,6 +39,7 @@ export const Target = ({
             key={i}
             addLetter={(e) => addLetter(e)}
             reset={reset}
+            correct={correct}
           />
         );
       })}
