@@ -16,3 +16,16 @@
   min-width: 250px;
   width: 25vw;
 }
+.NoWordWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.NoWord {
+  font-size: 20px;
+  max-width: 400px;
+  min-width: 250px;
+  width: 25vw;
+  margin-top: 2rem;
+  text-align: center;
+}

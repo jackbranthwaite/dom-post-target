@@ -1,14 +1,13 @@
-import React, { createRef, useEffect, useRef } from 'react';
-import s from './Target.module.scss';
-import { gsap } from 'gsap';
-import { LetterItem } from './letter-item/LetterItem';
+import React from 'react'
+import s from './Target.module.scss'
+import { LetterItem } from './letter-item/LetterItem'
 
 interface TargetProps {
-  word: string;
-  correct: boolean;
-  noLetters: boolean;
-  addLetter: (e: string) => void;
-  reset: boolean;
+  word: string
+  correct: boolean
+  noLetters: boolean
+  addLetter: (e: string) => void
+  reset: boolean
 }
 
 export const Target = ({
@@ -16,18 +15,18 @@ export const Target = ({
   correct,
   noLetters,
   addLetter,
-  reset,
+  reset
 }: TargetProps) => {
-  const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   if (!word) {
     return (
-      <div className={s.TargetContainer}>
-        {empty.map((i: number) => {
-          return <div className={s.LetterBox} key={i}></div>;
-        })}
+      <div className={s.NoWordWrapper}>
+        <p className={s.NoWord}>
+          There is currently no active word - come back later.
+        </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -41,8 +40,8 @@ export const Target = ({
             reset={reset}
             correct={correct}
           />
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}

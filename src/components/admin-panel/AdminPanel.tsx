@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { addLetters } from '../../services/api/add_letters';
-import { Button } from '../button/Button';
-import { LoadingSpinner } from '../loading-page/LoadingPage';
-import { TextInput } from '../text-input/TextInput';
-import s from './AdminPanel.module.scss';
+import React, { ChangeEvent, useState } from 'react'
+import { addLetters } from '../../services/api/add_letters'
+import { Button } from '../button/Button'
+import { TextInput } from '../text-input/TextInput'
+import s from './AdminPanel.module.scss'
+import { useRouter } from 'next/router'
+import { AxiosResponse } from 'axios'
 
 export const AdminPanel = () => {
-  const [newLetters, setNewLetters] = useState('');
-  const [addProcessing, setAddProcessing] = useState(false);
+  const [newLetters, setNewLetters] = useState('')
+  const [addProcessing, setAddProcessing] = useState(false)
+  const router = useRouter()
 
   const addLocalLetters = async () => {
-    setAddProcessing(true);
-    const letters = await addLetters({ letters: newLetters });
-    if (letters.status === 201) {
-      setAddProcessing(false);
+    setAddProcessing(true)
+    const letters = (await addLetters({
+      letters: newLetters
+    })) as AxiosResponse<any, any>
+    if (letters?.status === 201) {
+      setAddProcessing(false)
+      router.push('/home')
     }
-  };
+  }
 
   return (
     <div className={s.AdminContainer}>
@@ -24,10 +29,10 @@ export const AdminPanel = () => {
           <h1 className={s.Title}>target</h1>
         </div>
         <TextInput
-          title=''
-          type='text'
+          title=""
+          type="text"
           value={newLetters}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setNewLetters(e.target?.value)
           }
         />
@@ -40,5 +45,5 @@ export const AdminPanel = () => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

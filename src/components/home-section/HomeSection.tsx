@@ -135,7 +135,7 @@ export const HomeSection = () => {
           reset={reset}
         />
 
-        {!completed && (
+        {!completed && letters && (
           <div className={s.ContentWrapper}>
             <h1 className={s.CurrentWord}>{guess}</h1>
             <p className={s.Statement}>
