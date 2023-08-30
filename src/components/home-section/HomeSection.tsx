@@ -1,123 +1,124 @@
-import React, { useEffect, useState } from 'react';
-import { useRequireAuth } from '../../contexts/auth/useRequireAuth';
-import { addLetters } from '../../services/api/add_letters';
-import { getLetters } from '../../services/api/get_letters';
-import { checkDictionary } from '../../services/dictionary/dictionary';
-import { Button } from '../button/Button';
-import { Target } from '../target/Target';
-import { TextInput } from '../text-input/TextInput';
-import { Timer } from '../timer/Timer';
-import s from './HomeSection.module.scss';
-import { SignOut } from '../sign-out/SignOut';
-import { checkComplete, submitTime } from '../../services/api/submit_correct';
-import { LoadingSpinner } from '../loading-page/LoadingPage';
+import React, { useEffect, useState } from 'react'
+import { useRequireAuth } from '../../contexts/auth/useRequireAuth'
+import { addLetters } from '../../services/api/add_letters'
+import { getLetters } from '../../services/api/get_letters'
+import { checkDictionary } from '../../services/dictionary/dictionary'
+import { Button } from '../button/Button'
+import { Target } from '../target/Target'
+import { TextInput } from '../text-input/TextInput'
+import { Timer } from '../timer/Timer'
+import s from './HomeSection.module.scss'
+import { SignOut } from '../sign-out/SignOut'
+import { checkComplete, submitTime } from '../../services/api/submit_correct'
+import { LoadingSpinner } from '../loading-page/LoadingPage'
+import { AxiosResponse } from 'axios'
 
 interface ICompleted {
-  hours: string;
-  minutes: string;
-  seconds: string;
-  guess: string;
+  hours: string
+  minutes: string
+  seconds: string
+  guess: string
 }
 
 export const HomeSection = () => {
-  const [letters, setLetters] = useState('');
-  const [guess, setGuess] = useState('');
-  const [correct, setCorrect] = useState(false);
-  const [processing, setProcessing] = useState(true);
-  const [guessProcessing, setGuessProcessing] = useState(false);
-  const [error, setError] = useState('');
-  const [noLetters, setNoLetters] = useState(false);
+  const [letters, setLetters] = useState('')
+  const [guess, setGuess] = useState('')
+  const [correct, setCorrect] = useState(false)
+  const [processing, setProcessing] = useState(true)
+  const [guessProcessing, setGuessProcessing] = useState(false)
+  const [error, setError] = useState('')
+  const [noLetters, setNoLetters] = useState(false)
   const [currentTime, setCurrentTime] = useState({
     hours: '',
     minutes: '',
-    seconds: '',
-  });
-  const [completed, setCompleted] = useState<ICompleted>();
-  const [reset, setReset] = useState(false);
+    seconds: ''
+  })
+  const [completed, setCompleted] = useState<ICompleted>()
+  const [reset, setReset] = useState(false)
 
   const requestLetters = async () => {
-    const localLetters = await getLetters();
+    const localLetters = (await getLetters()) as AxiosResponse<any, any>
     if (localLetters?.data[0]) {
-      setLetters(localLetters?.data[0].letters);
+      setLetters(localLetters?.data[0].letters)
     } else {
-      setNoLetters(true);
+      setNoLetters(true)
     }
-  };
+  }
 
   const alreadyComplete = async () => {
-    const check = await checkComplete();
+    const check = (await checkComplete()) as AxiosResponse<any, any>
     if (check?.data[0]) {
-      console.log(check.data[0]);
-      setCompleted(check?.data[0]);
-      setCorrect(true);
-      setProcessing(false);
+      console.log(check.data[0])
+      setCompleted(check?.data[0])
+      setCorrect(true)
+      setProcessing(false)
     } else {
-      setProcessing(false);
+      setProcessing(false)
     }
-  };
+  }
 
   useEffect(() => {
-    requestLetters();
-    alreadyComplete();
-  }, []);
+    requestLetters()
+    alreadyComplete()
+  }, [])
 
   const checkGuess = () => {
-    setError('');
-    let localAnswer: Array<String> = [];
-    let localGuess: Array<String> = [];
+    setError('')
+    let localAnswer: Array<String> = []
+    let localGuess: Array<String> = []
 
     for (let i = 0; i < letters.length; i++) {
-      localAnswer.push(letters.charAt(i));
+      localAnswer.push(letters.charAt(i))
     }
 
     for (let i = 0; i < guess.length; i++) {
-      localGuess.push(guess.charAt(i));
+      localGuess.push(guess.charAt(i))
     }
 
     if (localAnswer.sort().join(',') === localGuess.sort().join(',')) {
-      wordCheck();
+      wordCheck()
     } else {
-      setError("The letters don't match");
+      setError("The letters don't match")
     }
-  };
+  }
 
   const wordCheck = async () => {
-    const word = await checkDictionary(guess);
+    const word = await checkDictionary(guess)
     if (word.status === 200) {
       await submitTime({
         hours: 24 - parseInt(currentTime.hours),
         minutes: 60 - parseInt(currentTime.minutes),
         seconds: 60 - parseInt(currentTime.seconds),
-        guess: guess,
-      });
-      setCorrect(true);
-      alreadyComplete();
+        guess: guess
+      })
+      setCorrect(true)
+      alreadyComplete()
     } else {
-      setError("That's not a word sorry!");
+      setError("That's not a word sorry!")
     }
-  };
+  }
 
   useEffect(() => {
     if (guess.length < 1) {
-      setError('');
+      setError('')
     }
-  }, [guess]);
+  }, [guess])
 
   useEffect(() => {
     if (reset) {
-      setGuess('');
+      setGuess('')
       setTimeout(() => {
-        setReset(false);
-      }, 2);
+        setReset(false)
+      }, 2)
     }
-  }, [reset]);
+  }, [reset])
 
   if (processing)
     return (
       <>
         <LoadingSpinner />
       </>
-    );
+    )
   return (
     <div className={s.HomeSectionContainer}>
       <SignOut />
@@ -174,5 +175,5 @@ export const HomeSection = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

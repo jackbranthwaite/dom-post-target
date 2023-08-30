@@ -1,25 +1,26 @@
-import React, { useContext, useState } from 'react';
-import { Button } from '../button/Button';
-import { TextInput } from '../text-input/TextInput';
-import s from './LoginSection.module.scss';
-import { AuthContext } from '../../contexts/AuthContext';
+import React, { useContext, useState } from 'react'
+import { Button } from '../button/Button'
+import { TextInput } from '../text-input/TextInput'
+import s from './LoginSection.module.scss'
+import { AuthContext } from '../../contexts/AuthContext'
+import { useRouter } from 'next/router'
 
 export const LoginSection = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState('');
-
-  const auth = useContext(AuthContext);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [processing, setProcessing] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+  const auth = useContext(AuthContext)
 
   const user = {
     email: email,
-    password: password,
-  };
+    password: password
+  }
 
   const handleLogin = async () => {
-    await auth.login(user);
-  };
+    await auth.login(user)
+  }
 
   return (
     <div className={s.LoginSectionContainer}>
@@ -44,7 +45,10 @@ export const LoginSection = () => {
         <Button processing={processing} secondary={false} onClick={handleLogin}>
           login
         </Button>
+        <Button secondary={false} onClick={() => router.push('/register')}>
+          register
+        </Button>
       </div>
     </div>
-  );
-};
+  )
+}

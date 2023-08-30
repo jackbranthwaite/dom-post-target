@@ -1,21 +1,21 @@
-import React, { ReactNode, useState } from 'react';
-import { LoadingSpinner } from '../loading-page/LoadingPage';
-import s from './Button.module.scss';
+import React, { ReactNode, useState } from 'react'
+import { LoadingSpinner } from '../loading-page/LoadingPage'
+import s from './Button.module.scss'
 
 interface ButtonProps {
-  children: ReactNode;
-  onClick: () => void;
-  secondary: boolean;
-  processing: boolean | undefined;
+  children: ReactNode
+  onClick: () => void
+  secondary: boolean
+  processing?: boolean | undefined
 }
 
 export const Button = ({
   children,
   onClick,
   secondary,
-  processing,
+  processing
 }: ButtonProps) => {
-  const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false)
   return (
     <div
       className={s.ButtonContainer}
@@ -30,5 +30,5 @@ export const Button = ({
       </button>
       {/* {processing && <LoadingSpinner color={hover ? '#fff' : '#485570'} />} */}
     </div>
-  );
-};
+  )
+}
